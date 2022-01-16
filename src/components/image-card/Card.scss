@@ -42,12 +42,13 @@
 }
 .card__image-wrapper--clicked {
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   margin: auto;
-  background-color: rgb(75, 56, 56);
+  background: rgb(17, 17, 17);
 }
 
 .card__like-button {

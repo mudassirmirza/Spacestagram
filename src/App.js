@@ -1,40 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import "./App.scss";
 import { Header } from "./components/header/header.js";
 import { Card } from "./components/image-card/Card.js";
+import { getImageByDate, getImagesByDates } from "./services/Api.js";
+import { nanoid } from "nanoid";
 function App() {
-  const [currentDate, setCurrentDate] = useState(new Date());
   const [cardDates, setCardDates] = useState([]);
-  const [numLoaded, setNumLoaded] = useState(0);
-  const [numImages, setNumImages] = useState(2);
+  const [isGetting, setIsGetting] = useState(false);
+  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [isInitialLoaded, setIsInitialLoaded] = useState(false);
 
   useEffect(() => {
-    setCardDates([
-      ...cardDates,
-      `${currentDate.getFullYear()}-${
-        currentDate.getMonth() + 1
-      }-${currentDate.getDate()}`,
-    ]);
-    setNumLoaded((currNum) => currNum + 1);
-  }, [currentDate]);
+    let tempStart = startDate.getTime();
+    tempStart -= 10 * 86400000;
+    setStartDate(new Date(tempStart));
+    window.addEventListener("scroll", handleScroll);
+    getImages();
+    setIsInitialLoaded((curr) => !curr);
+  }, []);
 
   useEffect(() => {
-    if (numLoaded < numImages) {
-      let tempDate = currentDate.getTime();
-      tempDate -= 86400000;
-      setCurrentDate(new Date(tempDate));
-      console.log("tempdate: " + currentDate.getDate());
+    setIsInitialLoaded((curr) => !curr);
+  }, [isInitialLoaded]);
+
+  useEffect(() => {}, [startDate]);
+  useEffect(() => {
+    if (!isGetting || isInitialLoaded) return;
+    getMoreImages();
+  }, [isGetting]);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight ||
+      isGetting
+    )
+      return;
+    setIsGetting(true);
+  };
+  const getImages = () => {
+    var newEnd = `${endDate.getFullYear()}-${
+      endDate.getMonth() + 1
+    }-${endDate.getDate()}`;
+    var newStart = `${startDate.getFullYear()}-${
+      startDate.getMonth() + 1
+    }-${startDate.getDate()}`;
+
+    getImagesByDates(newStart, newEnd).then((images) => {
+      setCardDates(images);
+      changeDates();
+    });
+  };
+  const getMoreImages = () => {
+    getImages();
+    setIsGetting(false);
+  };
+
+  const changeDates = () => {
+    let tempStart = startDate.getTime();
+    tempStart -= 10 * 86400000;
+    setStartDate(new Date(tempStart));
+    if (isInitialLoaded) {
+      let tempEnd = startDate.getTime();
+      tempEnd -= 86400000;
+      setEndDate(new Date(tempEnd));
     }
-  }, [numLoaded]);
+  };
 
   return (
     <div className="app">
       <Header />
       <div className="app__card-list">
-        {cardDates?.map((givenDate) => (
-          <Card date={givenDate} key={"card-key-" + givenDate} />
+        {cardDates?.map((givenObject) => (
+          <Suspense key={"card-key-" + nanoid()} fallback={<h1>loading</h1>}>
+            <Card
+              // date={givenDate}
+              givenObject={givenObject}
+            />
+          </Suspense>
         ))}
       </div>
+      {isGetting && <h1> LOADING...</h1>}
     </div>
   );
 }

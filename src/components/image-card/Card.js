@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { getImageByDate } from "../../services/Api";
+import { useState, useEffect, Suspense } from "react";
+import { nanoid } from "nanoid";
 import "./Card.scss";
 
-export const Card = ({ date }) => {
+export const Card = (props) => {
   const [imageInfo, setImageInfo] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
   const [likeBtnText, setLikeBtnText] = useState("Like");
@@ -11,21 +11,20 @@ export const Card = ({ date }) => {
   const [divClass, setDivClass] = useState("card__image-wrapper");
 
   useEffect(() => {
-    getImageByDate(date).then((imageData) => {
-      setImageInfo(imageData);
-      setCurrentUrl(imageData.url);
-    });
-  }, [date]);
+    setCurrentUrl(props.givenObject.url);
+  }, []);
 
-  useEffect(() => {}, [currentUrl]);
+  useEffect(() => {
+    setImageInfo(props.givenObject);
+  }, [currentUrl]);
 
   const handleImageClick = () => {
     if (currentUrl === imageInfo.url) {
       setBodyStyle(window.getComputedStyle(document.body).overflow);
       document.body.style.overflow = "hidden";
-      setCurrentUrl(imageInfo.hdurl);
       setImageClass(imageClass + "--clicked");
       setDivClass("card__image-wrapper--clicked");
+      setCurrentUrl(imageInfo.hdurl);
     } else {
       document.body.style.overflow = bodyStyle;
       setImageClass("card__image");
@@ -44,12 +43,12 @@ export const Card = ({ date }) => {
 
   return (
     <>
-      <article className="card">
+      <article className="card" id={`card-${nanoid()}`}>
         <div className={divClass}>
           <img
             className={imageClass}
             src={currentUrl}
-            onClick={handleImageClick}
+            onClick={imageInfo.media_type === "image" ? handleImageClick : null}
           />
         </div>
         <button className="card__like-button" onClick={handleLikeButton}>
@@ -66,3 +65,5 @@ export const Card = ({ date }) => {
     </>
   );
 };
+
+export default Card;
