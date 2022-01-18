@@ -13,7 +13,7 @@ export const useAxios = (pageData, dataDispatch) => {
     let startParam = new Date(currentDate.getTime() - 20 * 84000000)
       .toISOString()
       .split("T")[0];
-    setCurrentDate(new Date(currentDate.getTime() - 20 * 84000000));
+    setCurrentDate(new Date(currentDate.getTime() - 21 * 84000000));
     dataDispatch({ type: "CALL", isCalling: true });
     axios
       .get(`${baseUrl}`, {

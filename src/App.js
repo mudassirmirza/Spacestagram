@@ -1,9 +1,8 @@
 import React, { useReducer, useRef } from "react";
 import { Header } from "./components/header/header.js";
 import { Card } from "./components/image-card/Card";
-import { nanoid } from "nanoid";
 import "./App.scss";
-import { useInfiniteScroll } from "./components/hooks/useInfiniteScroll.js";
+import { useInfiniteScroll } from "./hooks/useInfiniteScroll.js";
 import { useAxios } from "./services/Api.js";
 
 function App() {
@@ -22,7 +21,7 @@ function App() {
   const pageReducer = (state, action) => {
     switch (action.type) {
       case "NEXT_PAGE":
-        return { state, pageNum: state.pageNum + 1 };
+        return { ...state, pageNum: state.pageNum + 1 };
       default:
         return state;
     }
@@ -44,11 +43,7 @@ function App() {
       <div className="app__card-list">
         {imageData.data.map((image, index) => {
           return (
-            <Card
-              key={`card-${nanoid()}`}
-              class_name=".card-img-top"
-              givenObject={image}
-            />
+            <Card key={index} class_name=".card-img-top" givenObject={image} />
           );
         })}
       </div>
@@ -57,7 +52,7 @@ function App() {
           <h1>Loading...</h1>
         </div>
       )}
-      <div ref={bottom}></div>
+      <div className="app__footer" ref={bottom}></div>
     </div>
   );
 }

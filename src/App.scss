@@ -14,3 +14,10 @@
   flex-direction: column;
   max-width: 50rem;
 }
+
+.app__footer {
+  display: flex;
+  align-self: stretch;
+  margin-bottom: 1px;
+  caret-color: transparent;
+}
