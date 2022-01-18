@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
 import "./Card.scss";
 
 export const Card = (props) => {
@@ -50,13 +49,20 @@ export const Card = (props) => {
     <>
       <article className="card">
         <div className={divClass}>
-          <img
-            className={imageClass}
-            src={currentUrl}
-            onClick={imageInfo.media_type === "image" ? handleImageClick : null}
-            loading="lazy"
-            alt={imageInfo.title}
-          />
+          {imageInfo.media_type === "image" ? (
+            <img
+              className={imageClass}
+              src={currentUrl}
+              onClick={handleImageClick}
+              alt={imageInfo.title}
+            />
+          ) : (
+            <iframe
+              className="card__iframe"
+              src={currentUrl}
+              allowFullScreen
+            ></iframe>
+          )}
         </div>
         <button className="card__like-button" onClick={handleLikeButton}>
           {likeBtnText}
