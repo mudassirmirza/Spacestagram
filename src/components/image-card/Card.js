@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import "./Card.scss";
 
@@ -6,23 +6,24 @@ export const Card = (props) => {
   const [imageInfo, setImageInfo] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
   const [likeBtnText, setLikeBtnText] = useState("Like");
+  const [isHd, setIsHd] = useState(true);
   const [imageClass, setImageClass] = useState("card__image");
   const [bodyStyle, setBodyStyle] = useState("");
   const [divClass, setDivClass] = useState("card__image-wrapper");
 
   useEffect(() => {
-    setCurrentUrl(props.givenObject.url);
+    setImageInfo(props.givenObject);
   }, []);
 
   useEffect(() => {
-    setImageInfo(props.givenObject);
-  }, [currentUrl]);
+    setCurrentUrl(imageInfo.url);
+  }, [imageInfo]);
 
-  const handleImageClick = () => {
-    if (currentUrl === imageInfo.url) {
+  useEffect(() => {
+    if (!isHd) {
       setBodyStyle(window.getComputedStyle(document.body).overflow);
       document.body.style.overflow = "hidden";
-      setImageClass(imageClass + "--clicked");
+      setImageClass("card__image--clicked");
       setDivClass("card__image-wrapper--clicked");
       setCurrentUrl(imageInfo.hdurl);
     } else {
@@ -31,6 +32,10 @@ export const Card = (props) => {
       setDivClass("");
       setCurrentUrl(imageInfo.url);
     }
+  }, [isHd]);
+
+  const handleImageClick = () => {
+    setIsHd((curr) => !curr);
   };
 
   const handleLikeButton = () => {
@@ -43,12 +48,14 @@ export const Card = (props) => {
 
   return (
     <>
-      <article className="card" id={`card-${nanoid()}`}>
+      <article className="card">
         <div className={divClass}>
           <img
             className={imageClass}
             src={currentUrl}
             onClick={imageInfo.media_type === "image" ? handleImageClick : null}
+            loading="lazy"
+            alt={imageInfo.title}
           />
         </div>
         <button className="card__like-button" onClick={handleLikeButton}>
