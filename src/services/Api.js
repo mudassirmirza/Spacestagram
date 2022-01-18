@@ -1,23 +1,37 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-export const getImageByDate = async (date) => {
-  try {
-    var response = await axios.get(
-      `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&date=${date}`
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const useAxios = (pageData, dataDispatch) => {
+  const offset = new Date().getTimezoneOffset();
+  const [currentDate, setCurrentDate] = useState(
+    new Date(new Date().getTime() - offset * 60 * 1000)
+  );
 
-export const getImagesByDates = async (start, end) => {
-  try {
-    var response = await axios.get(
-      `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}&start_date=${start}&end_date=${end}`
-    );
-    return response.data.reverse();
-  } catch (error) {
-    console.error(error);
-  }
+  const baseUrl = "https://api.nasa.gov/planetary/apod?";
+  useEffect(() => {
+    let endParam = currentDate.toISOString().split("T")[0];
+    let startParam = new Date(currentDate.getTime() - 20 * 84000000)
+      .toISOString()
+      .split("T")[0];
+    console.log(currentDate.toLocaleString());
+    setCurrentDate(new Date(currentDate.getTime() - 20 * 84000000));
+    dataDispatch({ type: "CALL", isCalling: true });
+    axios
+      .get(`${baseUrl}`, {
+        params: {
+          api_key: `${process.env.REACT_APP_API_KEY}`,
+          start_date: startParam,
+          end_date: endParam,
+        },
+      })
+      .then((pageData) => pageData.data.reverse())
+      .then((data) => {
+        dataDispatch({ type: "LOAD", data });
+        dataDispatch({ type: "CALL", isCalling: false });
+      })
+      .catch(function (error) {
+        dataDispatch({ type: "CALL", isCalling: false });
+        console.error(error);
+      });
+  }, [dataDispatch, pageData.pageNum]);
 };
