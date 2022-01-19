@@ -8,7 +8,7 @@ export const Header = () => {
       <div className="header__wrapper__line"></div>
       <img
         className="header__wrapper__logo"
-        src="/logo512.png"
+        src="./logo512.png"
         alt="Spacestagram Logo"
       />
     </div>

@@ -9,6 +9,7 @@ export const useAxios = (pageData, dataDispatch) => {
 
   const baseUrl = "https://api.nasa.gov/planetary/apod?";
   useEffect(() => {
+    console.log("call");
     let endParam = currentDate.toISOString().split("T")[0];
     let startParam = new Date(currentDate.getTime() - 10 * 84000000)
       .toISOString()

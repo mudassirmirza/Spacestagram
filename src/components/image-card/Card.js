@@ -5,21 +5,21 @@ export const Card = (props) => {
   const [imageInfo, setImageInfo] = useState("");
   const [currentUrl, setCurrentUrl] = useState("");
   const [likeBtnText, setLikeBtnText] = useState("Like");
-  const [isHd, setIsHd] = useState(true);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const [imageClass, setImageClass] = useState("card__image");
   const [bodyStyle, setBodyStyle] = useState("");
   const [divClass, setDivClass] = useState("card__image-wrapper");
 
   useEffect(() => {
     setImageInfo(props.givenObject);
-  }, [props]);
+  }, [props.givenObject]);
 
   useEffect(() => {
     setCurrentUrl(imageInfo.url);
   }, [imageInfo]);
 
   useEffect(() => {
-    if (!isHd) {
+    if (isFullScreen) {
       setBodyStyle(window.getComputedStyle(document.body).overflow);
       document.body.style.overflow = "hidden";
       setImageClass("card__image--clicked");
@@ -31,10 +31,10 @@ export const Card = (props) => {
       setDivClass("");
       setCurrentUrl(imageInfo.url);
     }
-  }, [isHd]);
+  }, [isFullScreen]);
 
   const handleImageClick = () => {
-    setIsHd((curr) => !curr);
+    setIsFullScreen((curr) => !curr);
   };
 
   const handleLikeButton = () => {
@@ -60,9 +60,10 @@ export const Card = (props) => {
           ) : (
             <iframe
               className="card__iframe"
+              frameBorder="0"
+              allow="fullscreen"
               title={imageInfo.title}
               src={currentUrl}
-              allowFullScreen
             ></iframe>
           )}
         </div>

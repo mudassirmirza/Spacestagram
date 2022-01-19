@@ -3,7 +3,7 @@ import { Header } from "./components/header/header.js";
 import { Card } from "./components/image-card/Card";
 import "./App.scss";
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll.js";
-import { useAxios } from "./services/Api.js";
+import { useAxios } from "./hooks/useAxios.js";
 
 function App() {
   const dataReducer = (state, action) => {

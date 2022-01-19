@@ -4,20 +4,19 @@
   justify-content: center;
   align-self: stretch;
   background-color: #2d2d2d;
-  box-shadow: 0px 4px 7px #c2c2c2;
+  box-shadow: 0px 0px 10px 1px #000000;
   margin-bottom: 1.5rem;
   &__logo {
     height: 4rem;
     margin-left: 1rem;
-    box-shadow: 0px 0px 5px 1px rgb(0, 0, 0);
+    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
     border-radius: 17px;
   }
-}
-
-h1 {
-  font-family: "Open Sans";
-  color: white;
-  text-shadow: 3px 3px 10px rgb(0, 0, 0);
-  border-right: thin solid rgb(177, 177, 177);
-  padding-right: 1rem;
+  h1 {
+    font-family: "Open Sans";
+    color: white;
+    text-shadow: 4px 4px 10px rgb(0, 0, 0);
+    border-right: thin solid rgb(255, 255, 255);
+    padding-right: 1rem;
+  }
 }
