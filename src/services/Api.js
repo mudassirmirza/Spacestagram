@@ -10,19 +10,19 @@ export const useAxios = (pageData, dataDispatch) => {
   const baseUrl = "https://api.nasa.gov/planetary/apod?";
   useEffect(() => {
     let endParam = currentDate.toISOString().split("T")[0];
-    let startParam = new Date(currentDate.getTime() - 20 * 84000000)
+    let startParam = new Date(currentDate.getTime() - 10 * 84000000)
       .toISOString()
       .split("T")[0];
-    setCurrentDate(new Date(currentDate.getTime() - 21 * 84000000));
     dataDispatch({ type: "CALL", isCalling: true });
     axios
-      .get(`${baseUrl}`, {
+      .get(baseUrl, {
         params: {
           api_key: `${process.env.REACT_APP_API_KEY}`,
           start_date: startParam,
           end_date: endParam,
         },
       })
+
       .then((pageData) => pageData.data.reverse())
       .then((data) => {
         dataDispatch({ type: "LOAD", data });
@@ -31,6 +31,9 @@ export const useAxios = (pageData, dataDispatch) => {
       .catch(function (error) {
         dataDispatch({ type: "CALL", isCalling: false });
         console.error(error);
-      });
+      })
+      .then(() =>
+        setCurrentDate((curr) => new Date(curr.getTime() - 11 * 84000000))
+      );
   }, [dataDispatch, pageData.pageNum]);
 };

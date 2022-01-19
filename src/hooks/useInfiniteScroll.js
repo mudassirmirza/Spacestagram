@@ -5,7 +5,7 @@ export const useInfiniteScroll = (scrollRef, pageDispatch) => {
     (node) => {
       new IntersectionObserver((entries) => {
         entries.forEach((en) => {
-          if (en.intersectionRatio > 0) {
+          if (en.intersectionRatio > 0 && window.scrollY > 2000) {
             pageDispatch({ type: "NEXT_PAGE" });
           }
         });

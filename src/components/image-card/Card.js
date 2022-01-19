@@ -12,7 +12,7 @@ export const Card = (props) => {
 
   useEffect(() => {
     setImageInfo(props.givenObject);
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     setCurrentUrl(imageInfo.url);
@@ -48,6 +48,7 @@ export const Card = (props) => {
   return (
     <>
       <article className="card">
+        <h2 className="card__title">{imageInfo.title}</h2>
         <div className={divClass}>
           {imageInfo.media_type === "image" ? (
             <img
@@ -59,6 +60,7 @@ export const Card = (props) => {
           ) : (
             <iframe
               className="card__iframe"
+              title={imageInfo.title}
               src={currentUrl}
               allowFullScreen
             ></iframe>
@@ -67,12 +69,11 @@ export const Card = (props) => {
         <button className="card__like-button" onClick={handleLikeButton}>
           {likeBtnText}
         </button>
-        <div className="card__text">
-          <h2 className="card__text card__text-title">{imageInfo.title}</h2>
-          <time className="card__text__date" dateTime={imageInfo.date}>
+        <p className="card__explanation">{imageInfo.explanation}</p>
+        <div className="card__date">
+          <time className="card__date-time" dateTime={imageInfo.date}>
             {imageInfo.date}
           </time>
-          <p className="card__text__explanation">{imageInfo.explanation}</p>
         </div>
       </article>
     </>
