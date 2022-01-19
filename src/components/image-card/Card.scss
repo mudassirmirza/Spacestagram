@@ -3,14 +3,14 @@
   box-shadow: 0px 0px 4px 1px rgb(59, 59, 59);
   color: white;
   margin-bottom: 3rem;
-  .card__title {
+  &__title {
     text-align: center;
     font-weight: 500;
     padding-top: 2rem;
     padding-bottom: 1rem;
     overflow-wrap: break-word;
   }
-  .card__image {
+  &__image {
     width: 29rem;
     display: block;
     flex-direction: column;
@@ -33,7 +33,15 @@
       cursor: zoom-out;
     }
   }
-  .card__image-wrapper--clicked {
+  &__iframe {
+    width: 29rem;
+    height: 20rem;
+    display: block;
+    flex-direction: column;
+    margin: auto;
+    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
+  }
+  &__image-wrapper--clicked {
     position: fixed;
     display: flex;
     top: 0;
@@ -44,29 +52,31 @@
     background: rgb(17, 17, 17);
   }
 
-  .card__like-button {
-    border: none;
+  &__like-button {
     font-size: 1rem;
     height: 2rem;
     width: 5rem;
     margin-left: 3rem;
     margin-top: 2rem;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-radius: 3px;
+    border-style: solid;
+    border-color: rgb(73, 73, 73);
     box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
 
     &:hover {
       background-color: rgb(73, 73, 73);
       color: rgb(255, 255, 255);
+      border-color: white;
     }
   }
 
-  .card__explanation {
+  &__explanation {
     text-align: left;
     flex-direction: column;
   }
 
-  .card__date {
+  &__date {
     text-align: right;
     margin-right: 3rem;
     padding-bottom: 2rem;

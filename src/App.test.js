@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from "@testing-library/react";
+import App from "./App";
+import React from "react";
 
-test('renders learn react link', () => {
+test("checks API call", () => {
+  jest.spyOn(React, "useEffect").mockImplementation((f) => {
+    return [];
+  });
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(React.useEffect).toBeCalledTimes(2);
 });
