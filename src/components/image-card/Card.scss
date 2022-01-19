@@ -1,65 +1,76 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(197, 209, 218);
-  width: 50%;
-  height: 50%;
+  background-color: #2d2d2d;
+  box-shadow: 0px 0px 4px 1px rgb(59, 59, 59);
+  color: white;
   margin-bottom: 3rem;
-  border: thin solid rgb(177, 177, 177);
-  border-radius: 10px;
-  padding: 3rem;
-}
-
-.card__image {
-  width: 100%;
-  height: auto;
-  aspect-ratio: attr(height) / attr(width);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 2px 0px black;
-  border-radius: 10px;
-  cursor: zoom-in;
-  &--clicked {
-    display: flex;
+  .card__title {
+    text-align: center;
+    font-weight: 500;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    overflow-wrap: break-word;
+  }
+  .card__image {
+    width: 29rem;
+    display: block;
+    flex-direction: column;
+    margin: auto;
+    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
+    cursor: zoom-in;
+    &--clicked {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: 100vh;
+      object-fit: contain;
+      cursor: zoom-out;
+    }
+  }
+  .card__image-wrapper--clicked {
     position: fixed;
+    display: flex;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     margin: auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    height: 100vh;
-    aspect-ratio: attr(height) / attr(width);
-    cursor: zoom-out;
+    background: rgb(17, 17, 17);
   }
-}
-.card__image-wrapper--clicked {
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  background: rgb(17, 17, 17);
-}
 
-.card__like-button {
-  border: none;
-}
+  .card__like-button {
+    border: none;
+    font-size: 1rem;
+    height: 2rem;
+    width: 5rem;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
 
-.card__text {
-  color: black;
-  flex-direction: column;
-  display: absolute;
-  align-items: left;
-  align-content: left;
-  justify-content: left;
+    &:hover {
+      background-color: rgb(73, 73, 73);
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .card__explanation {
+    text-align: left;
+    flex-direction: column;
+  }
+
+  .card__date {
+    text-align: right;
+    margin-right: 3rem;
+    padding-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.808);
+    font-weight: 600;
+  }
 }

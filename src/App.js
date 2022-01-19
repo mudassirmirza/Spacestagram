@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import { useReducer, useRef } from "react";
 import { Header } from "./components/header/header.js";
 import { Card } from "./components/image-card/Card";
 import "./App.scss";
@@ -47,11 +47,7 @@ function App() {
           );
         })}
       </div>
-      {imageData.isCalling && (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )}
+      {imageData.isCalling && <div className="app__loading"></div>}
       <div className="app__footer" ref={bottom}></div>
     </div>
   );
