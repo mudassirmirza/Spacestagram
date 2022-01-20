@@ -5,15 +5,16 @@
   margin-bottom: 3rem;
   img,
   iframe {
-    width: 29rem;
     max-width: 95%;
+    max-height: 95%;
     display: block;
-    flex-direction: column;
+    height: auto;
     margin: auto;
     box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
   }
   iframe {
     height: 20rem;
+    width: 29rem;
   }
   &__title {
     text-align: center;
@@ -24,17 +25,15 @@
   }
   &__image {
     cursor: zoom-in;
+    flex-direction: column;
     &--clicked {
-      display: block;
       position: fixed;
       top: 0;
       left: 0;
       bottom: 0;
       right: 0;
-      margin: auto;
       align-items: center;
       justify-content: center;
-      height: auto;
       object-fit: contain;
       cursor: zoom-out;
     }
