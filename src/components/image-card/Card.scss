@@ -6,7 +6,10 @@
   img,
   iframe {
     max-width: 95%;
-    max-height: 95%;
+    display: block;
+    flex-direction: column;
+    margin: auto;
+    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
   }
   &__title {
     text-align: center;
@@ -16,11 +19,6 @@
     overflow-wrap: break-word;
   }
   &__image {
-    width: 29rem;
-    display: block;
-    flex-direction: column;
-    margin: auto;
-    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
     cursor: zoom-in;
     &--clicked {
       display: block;
@@ -36,14 +34,6 @@
       object-fit: contain;
       cursor: zoom-out;
     }
-  }
-  &__iframe {
-    width: 29rem;
-    height: 20rem;
-    display: block;
-    flex-direction: column;
-    margin: auto;
-    box-shadow: 0px 0px 10px 1px rgb(0, 0, 0);
   }
   &__image-wrapper--clicked {
     position: fixed;
