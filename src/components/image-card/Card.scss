@@ -3,6 +3,11 @@
   box-shadow: 0px 0px 4px 1px rgb(59, 59, 59);
   color: white;
   margin-bottom: 3rem;
+  img,
+  iframe {
+    max-width: 95%;
+    max-height: 95%;
+  }
   &__title {
     text-align: center;
     font-weight: 500;
@@ -27,8 +32,7 @@
       margin: auto;
       align-items: center;
       justify-content: center;
-      width: auto;
-      height: 100vh;
+      height: auto;
       object-fit: contain;
       cursor: zoom-out;
     }
