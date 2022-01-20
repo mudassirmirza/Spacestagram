@@ -1,6 +1,10 @@
 # Spacestagram
- 
+
 https://mudassirmirza.github.io/Spacestagram/
+
+Spacestagram uses a responsive design, even on mobile!
+
+I used functional components to create cards that display information about the Astronomy Picture of the Day. I used custom hooks for infinite scrolling and API calls. You can click or tap on images to zoom in, and you can scroll down as long as you like.
 
 ## Getting Started with Create React App
 
