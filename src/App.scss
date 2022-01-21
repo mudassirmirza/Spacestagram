@@ -7,7 +7,7 @@
   background-color: rgb(255, 255, 255);
   &__footer {
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
   }
 
   &__loading {
@@ -16,7 +16,6 @@
     border-radius: 100%;
     width: 2vw;
     height: 2vw;
-    margin-bottom: 1px;
     align-self: center;
     animation: spin 2s ease-in-out infinite;
   }
