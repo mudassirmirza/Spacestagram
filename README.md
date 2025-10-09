@@ -1,78 +1,96 @@
-# Spacestagram
+# 🚀 Spacestagram
 
-https://mudassirmirza.github.io/Spacestagram/
+[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
+[![NASA API](https://img.shields.io/badge/NASA-APOD%20API-0B3D91?logo=nasa&logoColor=white)](https://api.nasa.gov/)
+[![Deploy](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-181717?logo=github)](https://mudassirmirza.github.io/Spacestagram/)
+[![Built with Create React App](https://img.shields.io/badge/Create%20React%20App-2025-blue?logo=react)](https://create-react-app.dev/)
 
-Spacestagram uses a responsive design, even on mobile!
+**Live Demo:** [mudassirmirza.github.io/Spacestagram](https://mudassirmirza.github.io/Spacestagram)
 
-I used functional components to create cards that display information about the Astronomy Picture of the Day. I used custom hooks for infinite scrolling and API calls. You can click or tap on images to zoom in, and you can scroll down as long as you like.
+Spacestagram is a React web app that displays NASA’s Astronomy Picture of the Day (APOD) with an elegant, responsive interface.
 
-## Getting Started with Create React App
+Scroll infinitely through breathtaking space photography, zoom into images, and learn about the universe — one picture at a time.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- **NASA API Integration:** Fetches real-time Astronomy Picture of the Day data.
+- **Infinite Scrolling:** Seamlessly loads more images using a custom hook.
+- **Responsive Design:** Optimized for desktop, tablet, and mobile screens.
+- **Image Zoom:** Tap or click to enlarge any photo.
+- **Modern React Architecture:** Built with functional components, hooks, and reusable UI logic.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Category   | Tools                                     |
+| ---------- | ----------------------------------------- |
+| Frontend   | React (Functional Components, Hooks)      |
+| Styling    | CSS3 / Flexbox / Responsive Media Queries |
+| API        | NASA Astronomy Picture of the Day (APOD)  |
+| Build Tool | Create React App                          |
+| Hosting    | GitHub Pages                              |
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚙️ Installation & Setup
 
-### `npm run build`
+1. **Clone the repository**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   git clone https://github.com/mudassirmirza/Spacestagram.git
+   cd Spacestagram
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install dependencies**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. **Run locally**
+   ```bash
+   npm start
+   ```
+   Then open [http://localhost:3000](http://localhost:3000) in your browser
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧩 Project Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    src/
+    ├── components/
+    │ ├── ImageCard.js # Displays  each APOD image
+    │ ├── ImageGrid.js # Renders a grid of images
+    │ └── Loader.js # Handles infinite scroll loading state
+    ├── hooks/
+    │ ├── useInfiniteScroll.js # Custom hook for lazy loading
+    │ └── useFetchApod.js # Custom hook for NASA API calls
+    ├── App.js
+    └── index.js
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🚀 Future Improvements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Add "like" and "save" functionality
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Support for date filtering or search by topic
 
-### Code Splitting
+- Dark/light mode toggle
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Offline caching for previously loaded images
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 👨‍💻 Author
 
-### Making a Progressive Web App
+**Mudassir Mirza**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Full Stack Developer
