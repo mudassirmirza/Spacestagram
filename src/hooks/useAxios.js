@@ -1,19 +1,27 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const useAxios = (pageData, dataDispatch) => {
-  const offset = new Date().getTimezoneOffset();
-  const [currentDate, setCurrentDate] = useState(
-    new Date(new Date().getTime() - offset * 60 * 1000)
-  );
+  const DAYS_PER_PAGE = 15;
+  const DAY_MS = 24 * 60 * 60 * 1000;
 
-  const baseUrl = "https://api.nasa.gov/planetary/apod?";
+  const baseUrl = "https://api.nasa.gov/planetary/apod";
+
   useEffect(() => {
-    let endParam = currentDate.toISOString().split("T")[0];
-    let startParam = new Date(currentDate.getTime() - 10 * 84000000)
-      .toISOString()
-      .split("T")[0];
+    // Use local midnight-adjusted "now" to account for timezone offset in ISO date
+    const offset = new Date().getTimezoneOffset();
+    const now = new Date(new Date().getTime() - offset * 60 * 1000);
+
+    // Derive non-overlapping windows from page number
+    // pageNum = 0 => most recent DAYS_PER_PAGE days
+    const endDate = new Date(now.getTime() - pageData.pageNum * DAYS_PER_PAGE * DAY_MS);
+    const startDate = new Date(endDate.getTime() - (DAYS_PER_PAGE - 1) * DAY_MS);
+
+    const endParam = endDate.toISOString().split("T")[0];
+    const startParam = startDate.toISOString().split("T")[0];
+
     dataDispatch({ type: "CALL", isCalling: true });
+
     axios
       .get(baseUrl, {
         params: {
@@ -22,18 +30,14 @@ export const useAxios = (pageData, dataDispatch) => {
           end_date: endParam,
         },
       })
-
-      .then((pageData) => pageData.data.reverse())
+      .then((res) => (Array.isArray(res.data) ? res.data.reverse() : [res.data]))
       .then((data) => {
         dataDispatch({ type: "LOAD", data });
         dataDispatch({ type: "CALL", isCalling: false });
       })
-      .catch(function (error) {
+      .catch((error) => {
         dataDispatch({ type: "CALL", isCalling: false });
         console.error(error);
-      })
-      .then(() =>
-        setCurrentDate((curr) => new Date(curr.getTime() - 11 * 84000000))
-      );
+      });
   }, [dataDispatch, pageData.pageNum]);
 };
